@@ -20,6 +20,9 @@ jobs:
         id: extract_version
         run: echo "::set-output name=version_number::$(grep -oP '(?<=<Version>)[^<]+' BuildTestApp/BuildTestApp.csproj)"
 
+      - name: Print Version Number
+        run: echo "Version number is ${{ steps.extract_version.outputs.version_number }}"
+
       - name: Configure Git
         run: |
           git config user.name "Add Git Release Tag Action"
