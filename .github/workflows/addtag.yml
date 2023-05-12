@@ -18,7 +18,7 @@ jobs:
 
       - name: Extract Version Number
         id: extract_version
-        run: echo "::set-output name=version_number::$(grep -oP '(?<=<Version>)[^<]+' BuildTestApp.csproj)"
+        run: echo "::set-output name=version_number::$(grep -oP '(?<=<Version>)[^<]+' BuildTestApp/BuildTestApp.csproj)"
 
       - name: Configure Git
         run: |
