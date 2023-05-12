@@ -6,7 +6,21 @@ on:
     tags: [ "RELEASE" ]
   pull_request:
     branches: [ "main" ]
-
+env:
+  IS_RELEASE_CANDIDATE: >-
+    ${{
+      (
+        github.event_name == 'pull_request' &&
+        startsWith(github.event.pull_request.title, 'RELEASES:') &&
+        contains(github.event.pull_request.labels.*.name, 'RELEASES')
+      )
+      ||
+      (
+        github.event_name == 'push' &&
+        startsWith(github.event.head_commit.message, 'RELEASES:') &&
+        github.ref_name == 'RELEASE'
+      )
+    }}
 jobs:
   build:
     runs-on: windows-2019
