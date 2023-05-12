@@ -1,0 +1,38 @@
+name: BUILD
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "RELEASE" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-2019
+    timeout-minutes: 0
+    steps:
+    - name: Check out
+      uses: actions/checkout@v2
+    - name: Setup .Net
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.0.100-preview.1.22110.4
+        include-prerelease: true
+    - name: Restore
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+  add_tag:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged && startsWith(github.event.pull_request.title, 'RELEASES:') && contains(github.event.pull_request.labels.*.name, 'RELEASES')
+    runs-on: windows-latest
+    needs: [build, test]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Add Git Tag
+        run: |
+          git tag -a "release-${{ github.run_number }}" -m "Release ${{ github.run_number }}"
+          git push origin --tags
