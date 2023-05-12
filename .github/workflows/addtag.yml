@@ -1,0 +1,21 @@
+name: Add Git Release Tag on Merge to Main
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  add_release_tag:
+    if: github.event.pull_request.merged && startsWith(github.event.pull_request.title, 'RELEASES:') && (contains(github.event.pull_request.labels.*.name, 'RELEASE') || contains(github.event.pull_request.labels.*.name, 'RELEASE'))
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Add Git Tag - Release
+        run: |
+          git tag -a "release-${{ github.run_number }}" -m "Release ${{ github.run_number }}"
+          git push origin --tags

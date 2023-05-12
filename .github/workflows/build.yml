@@ -39,14 +39,4 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-  add_tag:
-    if: github.event_name == 'pull_request' && github.event.pull_request.merged && startsWith(github.event.pull_request.title, 'RELEASES:') && (contains(github.event.pull_request.labels.*.name, 'release') || contains(github.event.pull_request.labels.*.name, 'RELEASE'))
-    runs-on: windows-latest
-    needs: [build]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Add Git Tag
-        run: |
-          git tag -a "release-${{ github.run_number }}" -m "Release ${{ github.run_number }}"
-          git push origin --tags
+
