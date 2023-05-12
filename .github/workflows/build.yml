@@ -40,7 +40,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
   add_tag:
-    if: github.event_name == 'pull_request' && github.event.pull_request.merged && startsWith(github.event.pull_request.title, 'RELEASES:') && (contains(github.event.pull_request.labels.*.name, 'release') || contains(github.event.pull_request.labels.*.name, 'RELEASES'))
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged && startsWith(github.event.pull_request.title, 'RELEASES:') && (contains(github.event.pull_request.labels.*.name, 'release') || contains(github.event.pull_request.labels.*.name, 'RELEASE'))
     runs-on: windows-latest
     needs: [build]
     steps:
