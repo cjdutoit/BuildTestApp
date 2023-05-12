@@ -28,7 +28,7 @@ jobs:
   add_tag:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged && startsWith(github.event.pull_request.title, 'RELEASES:') && contains(github.event.pull_request.labels.*.name, 'RELEASES')
     runs-on: windows-latest
-    needs: [build, test]
+    needs: [build]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
