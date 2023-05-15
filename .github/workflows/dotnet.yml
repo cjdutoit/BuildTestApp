@@ -29,11 +29,15 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Update the Node.js version to use
+    strategy:
+      matrix:
+        node-version: [16.x]
     steps:
     - name: Check out
       uses: actions/checkout@v2
     - name: Setup .Net
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 7.0.201
         include-prerelease: false
