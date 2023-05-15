@@ -42,10 +42,26 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+  log_values:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Extract Version Number
+      id: extract_version
+      run:
+        echo "::set-output name=version_number::$(grep -oP '(?<=<Version>)[^<]+' BuildTestApp/BuildTestApp.csproj)"
+    - name: Print Version Number
+      run: |
+        echo "Version number is ${{ steps.extract_version.outputs.version_number }}"
+        echo "Merged: ${{ github.event.pull_request.merged }}"
+        echo "Base ref: ${{ github.event.pull_request.base.ref }}"
+        echo "Title: ${{ github.event.pull_request.title }}"
+        echo "Labels: ${{ toJson(github.event.pull_request.labels) }}"
   add_tag:
     if: >
       github.event.pull_request.merged &&
-      github.event.pull_request.base.ref == 'master' &&
+      github.event.pull_request.base.ref == 'main' &&
       startsWith(github.event.pull_request.title, 'RELEASES:') &&
       contains(github.event.pull_request.labels.*.name, 'RELEASES')
     runs-on: ubuntu-latest
