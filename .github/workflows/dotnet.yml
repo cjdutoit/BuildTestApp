@@ -108,4 +108,4 @@ jobs:
         NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
     - name: Release Task
       run:
-        dotnet nuget push bin/Release/*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey ${{ secrets.NUGET_API_KEY }}
+        dotnet nuget push bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
