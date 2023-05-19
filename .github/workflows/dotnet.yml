@@ -98,6 +98,8 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.201
+    - name: Restore NuGet Packages
+      run: dotnet restore
     - name: Build Release
       run: dotnet build --no-restore --configuration Release
     - name: Pack Nuget
