@@ -97,6 +97,5 @@ jobs:
       env:
         NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
     - name: Release Task
-      uses: nuget/nuget-client@v2
-      with:
-        args: push /bin/Release/*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey ${ secrets.NUGET_API_KEY }
+      run:
+        dotnet nuget push /bin/Release/*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey ${ secrets.NUGET_API_KEY }
