@@ -71,7 +71,7 @@ jobs:
         token: ${{ secrets.PAT_FOR_TAGGING }}
     - name: Add Release Tag
       run: |-
-        git tag -a "release-${{ steps.extract_version.outputs.version_number }}" -m "Release ${{ steps.extract_version.outputs.version_number }}"
+        git tag -a "v${{ steps.extract_version.outputs.version_number }}" -m "Release - v${{ steps.extract_version.outputs.version_number }}"
         git push origin --tags
     - name: Create release
       id: create_release
@@ -79,10 +79,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PAT_FOR_TAGGING }}
       with:
-        tag_name: "release-${{ steps.extract_version.outputs.version_number }}"
-        release_name: "Release ${{ steps.extract_version.outputs.version_number }}"
+        tag_name: "v${{ steps.extract_version.outputs.version_number }}"
+        release_name: "Release - v${{ steps.extract_version.outputs.version_number }}"
         body: |
-          #Release ${{ steps.extract_version.outputs.version_number }}#
+          ### Release - v${{ steps.extract_version.outputs.version_number }}
           
-          ##Release Notes## 
+          #### Release Notes
           ${{ steps.extract_version.outputs.package_release_notes }}
