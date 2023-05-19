@@ -44,24 +44,6 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-  log_values:
-    runs-on: ubuntu-latest
-    needs:
-    - build
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Extract Version Number
-      id: extract_version
-      run:
-        echo "::set-output name=version_number::$(grep -oP '(?<=<Version>)[^<]+' BuildTestApp/BuildTestApp.csproj)"
-    - name: Print Version Number
-      run: |
-        echo "Version number is ${{ steps.extract_version.outputs.version_number }}"
-        echo "Merged: ${{ github.event.pull_request.merged }}"
-        echo "Base ref: ${{ github.event.pull_request.base.ref }}"
-        echo "Title: ${{ github.event.pull_request.title }}"
-        echo "Labels: ${{ toJson(github.event.pull_request.labels) }}"
   add_tag:
     runs-on: ubuntu-latest
     needs:
@@ -77,8 +59,8 @@ jobs:
     - name: Extract Version Number
       id: extract_version
       run: |-
-        echo "version_number=$(grep -oP '(?<=<Version>)[^<]+' NEL.MESH/NEL.MESH.csproj)" >> $GITHUB_OUTPUT
-        echo "package_release_notes=$(grep -oP '(?<=<PackageReleaseNotes>)[^<]+' NEL.MESH/NEL.MESH.csproj)" >> $GITHUB_OUTPUT
+        echo "version_number=$(grep -oP '(?<=<Version>)[^<]+' BuildTestApp/BuildTestApp.csproj)" >> $GITHUB_OUTPUT
+        echo "package_release_notes=$(grep -oP '(?<=<PackageReleaseNotes>)[^<]+' BuildTestApp/BuildTestApp.csproj)" >> $GITHUB_OUTPUT
     - name: Configure Git
       run: |-
         git config user.name "GitHub Action"
