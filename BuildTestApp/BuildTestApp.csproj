@@ -6,10 +6,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.0.1.5</AssemblyVersion>
-		<FileVersion>1.0.1.5</FileVersion>
-		<Version>1.0.1.5</Version>
-		<PackageReleaseNotes>Testing Tagging And Release Creation</PackageReleaseNotes>
+		<AssemblyVersion>1.0.1.6</AssemblyVersion>
+		<FileVersion>1.0.1.6</FileVersion>
+		<Version>1.0.1.6</Version>
+		<PackageReleaseNotes>Testing Automated Publish To Nuget</PackageReleaseNotes>
 	</PropertyGroup>
 
 </Project>
