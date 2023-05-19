@@ -95,7 +95,7 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT_FOR_TAGGING }}
       with:
         tag_name: "release-${{ steps.extract_version.outputs.version_number }}"
         release_name: "Release ${{ steps.extract_version.outputs.version_number }}"
