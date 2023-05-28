@@ -105,9 +105,7 @@ jobs:
     - name: Download README
       run: curl -O https://raw.githubusercontent.com/cjdutoit/BuildTestApp/main/README.md
     - name: Pack Nuget
-      run: dotnet pack --configuration Release  --include-source --include-symbols
-      env:
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+      run: dotnet pack --configuration Release --include-source --include-symbols
     - name: Release Task
       run:
-        dotnet nuget push **/bin/Release/**/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+        dotnet nuget push **/bin/Release/**/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
