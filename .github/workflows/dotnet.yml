@@ -102,10 +102,8 @@ jobs:
       run: dotnet restore
     - name: Build Release
       run: dotnet build --no-restore --configuration Release
-    - name: Download README
-      run: curl -O README https://raw.githubusercontent.com/cjdutoit/BuildTestApp/main/README.md
     - name: Pack Nuget
-      run: dotnet pack --configuration Release --include-source --include-symbols --include README
+      run: dotnet pack --configuration Release --include-source --include-symbols --include README.md --property "PackageReadmeFile=README.md"
     - name: Release Task
       run:
         dotnet nuget push **/bin/Release/**/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
