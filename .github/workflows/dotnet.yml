@@ -103,7 +103,7 @@ jobs:
     - name: Build Release
       run: dotnet build --no-restore --configuration Release
     - name: Copy README to Output
-      run: cp README.md **/bin/Release/
+      run: cp README.md **/bin/Release/README
     - name: Pack Nuget
       run: dotnet pack --configuration Release --include-symbols
     - name: Release Task
