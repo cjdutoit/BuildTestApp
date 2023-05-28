@@ -6,10 +6,19 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.0.1.33</AssemblyVersion>
-		<FileVersion>1.0.1.33</FileVersion>
-		<Version>1.0.1.33</Version>
+		<AssemblyVersion>1.0.1.35</AssemblyVersion>
+		<FileVersion>1.0.1.35</FileVersion>
+		<Version>1.0.1.35</Version>
 		<PackageReleaseNotes>Testing Automated Publish To Nuget</PackageReleaseNotes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>true</Pack>
+      <PackagePath></PackagePath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>
