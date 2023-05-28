@@ -103,7 +103,7 @@ jobs:
     - name: Build Release
       run: dotnet build --no-restore --configuration Release
     - name: Pack Nuget
-      run: dotnet pack --configuration Release --include README.md --property "PackageReadme=README.md"
+      run: dotnet pack --configuration Release --include-symbols --property:PackageReadmeFile=README.md
     - name: Release Task
       run:
         dotnet nuget push **/bin/Release/**/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
