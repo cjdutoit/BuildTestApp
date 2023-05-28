@@ -94,6 +94,10 @@ jobs:
     steps:
     - name: Check out
       uses: actions/checkout@v3
+    - name: Authenticate with GitHub
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.PAT_FOR_TAGGING }}
     - name: Setup .Net
       uses: actions/setup-dotnet@v3
       with:
