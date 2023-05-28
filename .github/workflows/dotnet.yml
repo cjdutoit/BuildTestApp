@@ -105,7 +105,7 @@ jobs:
     - name: Download README
       run: curl -O https://raw.githubusercontent.com/cjdutoit/BuildTestApp/main/README.md
     - name: Pack Nuget
-      run: dotnet pack --configuration Release
+      run: dotnet pack --configuration Release  --include-source --include-symbols
       env:
         NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
     - name: Release Task
