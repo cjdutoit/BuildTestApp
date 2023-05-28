@@ -94,10 +94,6 @@ jobs:
     steps:
     - name: Check out
       uses: actions/checkout@v3
-    - name: Authenticate with GitHub
-      uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.PAT_FOR_TAGGING }}
     - name: Setup .Net
       uses: actions/setup-dotnet@v3
       with:
@@ -106,10 +102,6 @@ jobs:
       run: dotnet restore
     - name: Build Release
       run: dotnet build --no-restore --configuration Release
-    - name: Copy README to Output
-      run: |
-        RELEASE_DIR=$(find $GITHUB_WORKSPACE -type d -name "bin" -path "*/Release")
-        cp $GITHUB_WORKSPACE/README.md "$RELEASE_DIR/README"
     - name: Pack Nuget
       run: dotnet pack --configuration Release --include-symbols
     - name: Release Task
