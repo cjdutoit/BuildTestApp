@@ -6,9 +6,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.0.1.21</AssemblyVersion>
-		<FileVersion>1.0.1.21</FileVersion>
-		<Version>1.0.1.21</Version>
+		<AssemblyVersion>1.0.1.22</AssemblyVersion>
+		<FileVersion>1.0.1.22</FileVersion>
+		<Version>1.0.1.22</Version>
 		<PackageReleaseNotes>Testing Automated Publish To Nuget</PackageReleaseNotes>
 	</PropertyGroup>
 
