@@ -102,10 +102,12 @@ jobs:
       run: dotnet restore
     - name: Build Release
       run: dotnet build --no-restore --configuration Release
+    - name: Download README
+      run: curl -O https://raw.githubusercontent.com/cjdutoit/BuildTestApp/main/README.md
     - name: Pack Nuget
       run: dotnet pack --configuration Release
       env:
         NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
     - name: Release Task
       run:
-        dotnet nuget push **/bin/Release/**/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --readme https://raw.githubusercontent.com/cjdutoit/BuildTestApp/main/README.md
+        dotnet nuget push **/bin/Release/**/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
