@@ -61,7 +61,8 @@ jobs:
       id: extract_version
       run: |-
         echo "version_number=$(grep -oP '(?<=<Version>)[^<]+' BuildTestApp/BuildTestApp.csproj)" >> $GITHUB_OUTPUT
-        echo "package_release_notes=$(awk -v RS='' -F'</?PackageReleaseNotes>' 'NF>1{print $2}' BuildTestApp/BuildTestApp.csproj | sed -e 's/^[[:space:]]*//')" >> $GITHUB_OUTPUT
+        package_release_notes=$(awk -v RS='' -F'</?PackageReleaseNotes>' 'NF>1{print $2}' BuildTestApp/BuildTestApp.csproj | sed -e 's/^[[:space:]]*//')
+        echo "package_release_notes=$package_release_notes" >> $GITHUB_OUTPUT
     - name: Print Version Number and Release Notes
       run: |
         echo "Version number is ${{ steps.extract_version.outputs.version_number }}"
