@@ -61,7 +61,7 @@ jobs:
       id: extract_version
       run: |-
         echo "version_number=$(grep -oP '(?<=<Version>)[^<]+' BuildTestApp/BuildTestApp.csproj)" >> $GITHUB_OUTPUT
-        echo "package_release_notes=$(awk -F'[<>]' '/<PackageReleaseNotes>/{flag=1; next} /<\/PackageReleaseNotes>/{flag=0} flag' path/to/your.csproj)" >> $GITHUB_OUTPUT
+        echo "package_release_notes=$(awk -F'[<>]' '/<PackageReleaseNotes>/{flag=1; next} /<\/PackageReleaseNotes>/{flag=0} flag {sub(/^[ \t]+/, ""); print}' BuildTestApp/BuildTestApp.csproj)" >> $GITHUB_OUTPUT
     - name: Configure Git
       run: |-
         git config user.name "GitHub Action"
@@ -77,6 +77,8 @@ jobs:
     - name: Create release
       id: create_release
       uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_FOR_TAGGING }}
       with:
         tag_name: "v${{ steps.extract_version.outputs.version_number }}"
         release_name: "Release - v${{ steps.extract_version.outputs.version_number }}"
