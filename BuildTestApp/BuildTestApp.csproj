@@ -6,9 +6,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.0.1.42</AssemblyVersion>
-		<FileVersion>1.0.1.42</FileVersion>
-		<Version>1.0.1.42</Version>
+		<AssemblyVersion>1.0.1.43</AssemblyVersion>
+		<FileVersion>1.0.1.43</FileVersion>
+		<Version>1.0.1.43</Version>
 		<PackageReleaseNotes>
 			Testing 
 			
