@@ -57,12 +57,15 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - name: Extract Version Number
+    - name: Extract Version Number and Release Notes
       id: extract_version
       run: |-
         echo "version_number=$(grep -oP '(?<=<Version>)[^<]+' BuildTestApp/BuildTestApp.csproj)" >> $GITHUB_OUTPUT
         echo "package_release_notes=$(grep -oP '(?<=<PackageReleaseNotes>)[^<]+' BuildTestApp/BuildTestApp.csproj | sed 's/^[ \t]*//;s/[ \t]*$//')" >> $GITHUB_OUTPUT
-
+    - name: Print Version Number and Release Notes
+      run: |
+        echo "Version number is ${{ steps.extract_version.outputs.version_number }}"
+        echo "Release Notes: ${{ steps.extract_version.outputs.package_release_notes }}"
     - name: Configure Git
       run: |-
         git config user.name "GitHub Action"
