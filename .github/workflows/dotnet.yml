@@ -61,7 +61,8 @@ jobs:
       id: extract_version
       run: |-
         echo "version_number=$(grep -oP '(?<=<Version>)[^<]+' BuildTestApp/BuildTestApp.csproj)" >> $GITHUB_OUTPUT
-        echo -e "package_release_notes=\"$(awk -F'[<>]' '/<PackageReleaseNotes>/{flag=1; next} /<\/PackageReleaseNotes>/{flag=0} flag {sub(/^[ \t]+/, ""); print}' BuildTestApp/BuildTestApp.csproj | awk 'NR>1{print \" \" $0; next}1')\"" >> $GITHUB_OUTPUT
+        echo "package_release_notes=$(grep -oP '(?<=<PackageReleaseNotes>)[^<]+' BuildTestApp/BuildTestApp.csproj | sed 's/^[ \t]*//;s/[ \t]*$//')" >> $GITHUB_OUTPUT
+
     - name: Configure Git
       run: |-
         git config user.name "GitHub Action"
