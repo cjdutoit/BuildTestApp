@@ -90,9 +90,9 @@ jobs:
         tag_name: "v${{ steps.extract_version.outputs.version_number }}"
         release_name: "Release - v${{ steps.extract_version.outputs.version_number }}"
         body: |
-          ### Release - v${{ steps.extract_version.outputs.version_number }}
+          ## Release - v${{ steps.extract_version.outputs.version_number }}
           
-          #### Release Notes
+          ### Release Notes
           ${{ env.package_release_notes }}
   publish:
     runs-on: ubuntu-latest
