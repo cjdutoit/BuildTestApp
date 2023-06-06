@@ -6,16 +6,67 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.0.1.51</AssemblyVersion>
-		<FileVersion>1.0.1.51</FileVersion>
-		<Version>1.0.1.51</Version>
+		<AssemblyVersion>1.0.1.52</AssemblyVersion>
+		<FileVersion>1.0.1.52</FileVersion>
+		<Version>1.0.1.52</Version>
 		<PackageReleaseNotes>
-			Testing 
+			#Adding Support For Generic Job Definitions
+
+			## BREAKING CHANGE
+			We are excited to announce a significant update to how we define jobs for GitHub Actions using ADotNet! 
+			Starting from this release, we have introduced a breaking change that allows the usage of generic job
+			definitions, replacing the previous job names specifically used for build, tagging, and release.
+			This change requires a small code modification in how you define jobs. You will now have the
+			flexibility to define jobs based on your specific needs, enhancing customization and providing
+			a more streamlined workflow.
+
+			### Before
+			```csharp
+			Jobs = new Jobs
+			{
+				Build = new BuildJob
+				{
+					. . .
+				},
+				AddTag = new TagJob
+				{
+					. . .
+				},
+				Publish = new PublishJob
+				{
+					. . .
+				},
+			}
+			```
+
+			### Now
+			```csharp
+			Jobs = new Jobs
+			{
+				{
+					"build",
+					new Job
+					{
+						. . .
+					}
+				},
+				{
+					"add_tag",
+					new Job
+					{
+						. . .
+					}
+				},
+				{
+					"publish",
+					new Job
+					{
+						. . .
+					}
+				},
+			}
+			```
 			
-			Automated 
-			Publish 
-			To 
-			Nuget
 		</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildTestApp", "BuildTestAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildTestApp.Tests.Unit", "BuildTestApp.Tests.Unit\BuildTestApp.Tests.Unit.csproj", "{218BA930-69B0-4C3C-951B-ADFFEB9FA6FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTestApp.Tests.Integration", "BuildTestApp.Tests.Integration\BuildTestApp.Tests.Integration.csproj", "{5E7ACDC4-D81B-4254-B73C-F5E0A4C41CB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildTestApp.Tests.Integration", "BuildTestApp.Tests.Integration\BuildTestApp.Tests.Integration.csproj", "{5E7ACDC4-D81B-4254-B73C-F5E0A4C41CB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTestApp.Infrastructure", "BuildTestApp.Infrastructure\BuildTestApp.Infrastructure.csproj", "{D9DE734F-9A53-4C28-8AB8-44BD7E0B4AEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{5E7ACDC4-D81B-4254-B73C-F5E0A4C41CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E7ACDC4-D81B-4254-B73C-F5E0A4C41CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E7ACDC4-D81B-4254-B73C-F5E0A4C41CB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9DE734F-9A53-4C28-8AB8-44BD7E0B4AEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9DE734F-9A53-4C28-8AB8-44BD7E0B4AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9DE734F-9A53-4C28-8AB8-44BD7E0B4AEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9DE734F-9A53-4C28-8AB8-44BD7E0B4AEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
