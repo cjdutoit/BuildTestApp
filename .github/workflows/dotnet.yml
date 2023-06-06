@@ -79,9 +79,12 @@ jobs:
         echo "Version - ${{ env.version_number }}"
     - name: Extract Package Release Notes
       run: >-
-        package_release_notes=$(awk -v RS='\n' '/<PackageReleaseNotes>/,/<\/PackageReleaseNotes>/{if(!/<PackageReleaseNotes>|<\/PackageReleaseNotes>/) print}' BuildTestApp/BuildTestApp.csproj | sed -e 's/^[[:space:]]*//' -e '/^$/d')
+        package_release_notes=$(awk -v RS='' -F'</?PackageReleaseNotes>' 'NF>1{print $2}' ADotNet/ADotNet.csproj | sed -e 's/^[[:space:]]*//')
+
         echo 'package_release_notes<<EOF' >> $GITHUB_ENV
+
         echo -e "$package_release_notes" >> $GITHUB_ENV
+
         echo 'EOF' >> $GITHUB_ENV
 
         echo "PackageReleaseNotes - ${{ env.package_release_notes }}"
