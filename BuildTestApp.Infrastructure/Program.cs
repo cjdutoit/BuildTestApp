@@ -113,7 +113,7 @@ namespace BuildTestApp.Infrastructure
                                 },
 
                                 new ExtractProjectPropertyTask(
-                                    projectRelativePath: "ADotNet/ADotNet.csproj",
+                                    projectRelativePath: "BuildTestApp/BuildTestApp.csproj",
                                     propertyName: "Version",
                                     environmentVariableName: "version_number")
                                 {
@@ -121,7 +121,7 @@ namespace BuildTestApp.Infrastructure
                                 },
 
                                 new ExtractProjectPropertyTask(
-                                    projectRelativePath: "ADotNet/ADotNet.csproj",
+                                    projectRelativePath: "BuildTestApp/BuildTestApp.csproj",
                                     propertyName: "PackageReleaseNotes",
                                     environmentVariableName: "package_release_notes")
                                 {
