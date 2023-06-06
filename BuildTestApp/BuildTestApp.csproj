@@ -6,9 +6,9 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<AssemblyVersion>1.0.1.52</AssemblyVersion>
-		<FileVersion>1.0.1.52</FileVersion>
-		<Version>1.0.1.52</Version>
+		<AssemblyVersion>1.0.1.53</AssemblyVersion>
+		<FileVersion>1.0.1.53</FileVersion>
+		<Version>1.0.1.53</Version>
 		<PackageReleaseNotes>
 			#Adding Support For Generic Job Definitions
 
@@ -21,7 +21,7 @@
 			a more streamlined workflow.
 
 			### Before
-			```csharp
+
 			Jobs = new Jobs
 			{
 				Build = new BuildJob
@@ -37,10 +37,10 @@
 					. . .
 				},
 			}
-			```
+
 
 			### Now
-			```csharp
+
 			Jobs = new Jobs
 			{
 				{
@@ -65,7 +65,6 @@
 					}
 				},
 			}
-			```
 			
 		</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
