@@ -68,7 +68,7 @@ jobs:
         git config user.email "action@github.com"
     - name: Extract Version
       run: >-
-        version_number=$(awk -v RS='\n' '/<Version>/,/<\/Version>/{if(!/<PackageReleaseNotes>|<\/Version>/) print}' BuildTestApp/BuildTestApp.csproj | sed -e 's/^[[:space:]]*//' -e '/^$/d')
+        version_number=$(awk -v RS='</?Version>' 'NF>1{gsub(/<\/?[^>]+>/, ""); gsub(/^[[:space:]]+|[[:space:]]+$/, ""); print}' BuildTestApp/BuildTestApp.csproj | sed -e '/^$/d')
 
         echo 'version_number<<EOF' >> $GITHUB_ENV
 
@@ -79,7 +79,7 @@ jobs:
         echo "Version - ${{ env.version_number }}"
     - name: Extract Package Release Notes
       run: >-
-        package_release_notes=$(awk -v RS='\n' '/<PackageReleaseNotes>/,/<\/PackageReleaseNotes>/{if(!/<PackageReleaseNotes>|<\/PackageReleaseNotes>/) print}' BuildTestApp/BuildTestApp.csproj | sed -e 's/^[[:space:]]*//' -e '/^$/d')
+        package_release_notes=$(awk -v RS='</?PackageReleaseNotes>' 'NF>1{gsub(/<\/?[^>]+>/, ""); gsub(/^[[:space:]]+|[[:space:]]+$/, ""); print}' BuildTestApp/BuildTestApp.csproj | sed -e '/^$/d')
 
         echo 'package_release_notes<<EOF' >> $GITHUB_ENV
 
