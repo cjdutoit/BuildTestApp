@@ -44,7 +44,7 @@ jobs:
         
         sudo apt install -y xmlstarlet
 
-        version_number = $(xmlstarlet sel -t -v "//Version" BuildTestApp/BuildTestApp.csproj)
+        export version_number=$(xmlstarlet sel -t -v "//Version" BuildTestApp/BuildTestApp.csproj)
 
         echo 'version_number<<EOF' >> $GITHUB_ENV
 
@@ -60,7 +60,7 @@ jobs:
 
         sudo apt install -y xmlstarlet  
 
-        package_release_notes = $(xmlstarlet sel -t -v "//PackageReleaseNotes" BuildTestApp/BuildTestApp.csproj)
+        export package_release_notes=$(xmlstarlet sel -t -v "//PackageReleaseNotes" BuildTestApp/BuildTestApp.csproj)
 
         echo 'package_release_notes<<EOF' >> $GITHUB_ENV
 
