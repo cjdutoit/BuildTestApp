@@ -38,11 +38,6 @@ jobs:
       with:
         dotnet-version: 7.0.201
 
-    - name: Set up PowerShell
-      uses: actions/setup-powershell@v1
-      with:
-        pwsh-version: latest
-
     - name: Extract Version
       run: >-
 
@@ -55,6 +50,7 @@ jobs:
         echo 'EOF' >> $GITHUB_ENV
 
         echo "Version - ${{ env.version_number }}"
+      shell: pwsh
 
     - name: Extract Package Release Notes
       run: >-
@@ -68,6 +64,7 @@ jobs:
         echo 'EOF' >> $GITHUB_ENV
 
         echo "PackageReleaseNotes - ${{ env.package_release_notes }}"
+      shell: pwsh
 
     - name: Restore
       run: dotnet restore
