@@ -68,7 +68,7 @@ jobs:
         git config user.email "action@github.com"
     - name: Extract Version
       run: >-
-        version_number=$(awk -v RS='</?Version>' 'NF>1{gsub(/<\/?[^>]+>/, ""); gsub(/^[[:space:]]+|[[:space:]]+$/, ""); print}' BuildTestApp/BuildTestApp.csproj | sed -e '/^$/d')
+        version_number=$((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "Version").node.InnerXML)
 
         echo 'version_number<<EOF' >> $GITHUB_ENV
 
@@ -79,7 +79,7 @@ jobs:
         echo "Version - ${{ env.version_number }}"
     - name: Extract Package Release Notes
       run: >-
-        package_release_notes=$(awk -v RS='</?PackageReleaseNotes>' 'NF>1{gsub(/<\/?[^>]+>/, ""); gsub(/^[[:space:]]+|[[:space:]]+$/, ""); print}' BuildTestApp/BuildTestApp.csproj | sed -e '/^$/d')
+        package_release_notes=$((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "PackageReleaseNotes").node.InnerXML)
 
         echo 'package_release_notes<<EOF' >> $GITHUB_ENV
 
