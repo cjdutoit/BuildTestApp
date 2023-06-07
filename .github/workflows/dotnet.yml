@@ -38,14 +38,7 @@ jobs:
       with:
         dotnet-version: 7.0.201
 
-    - name: Set up PowerShell
-      uses: actions/setup-powershell@v1
-      run: dotnet restore
-
-
     - name: Extract Version
-      with:
-        pwsh: latest
       run: >-
         version_number = [xml](Get-Content BuildTestApp/BuildTestApp.csproj).SelectSingleNode("//Version").InnerText
 
@@ -56,6 +49,7 @@ jobs:
         echo 'EOF' >> $GITHUB_ENV
 
         echo "Version - ${{ env.version_number }}"
+
     - name: Extract Package Release Notes
       run: >-
         package_release_notes = [xml](Get-Content BuildTestApp/BuildTestApp.csproj).SelectSingleNode("//PackageReleaseNotes").InnerText
