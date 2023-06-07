@@ -43,7 +43,7 @@ jobs:
         $version_number = (Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//Version").node.InnerXML
         echo "Version - $version_number"
 
-        $env:version_number = $version_number
+        echo "version_number=$version_number" >> $GITHUB_ENV
 
         echo "Version - ${{ env.version_number }}"
       shell: pwsh
