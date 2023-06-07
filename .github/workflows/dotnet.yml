@@ -44,7 +44,9 @@ jobs:
 
         echo "Version - $version_number"
 
-        pwsh -c "echo 'version_number=$version_number' | Out-File -FilePath $env:GITHUB_ENV -Append"
+        echo 'version_number<<EOF' >> $GITHUB_ENV
+        echo "$version_number" >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
 
         echo "Version - ${{ env.version_number }}"
       shell: pwsh
@@ -55,7 +57,9 @@ jobs:
 
         echo "PackageReleaseNotes - $package_release_notes"
 
-        pwsh -c "echo 'package_release_notes=$package_release_notes' | Out-File -FilePath $env:GITHUB_ENV -Append"
+        echo 'package_release_notes<<EOF' >> $GITHUB_ENV
+        echo "$package_release_notes" >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
 
         echo "PackageReleaseNotes - ${{ env.package_release_notes }}"
       shell: pwsh
