@@ -43,7 +43,7 @@ jobs:
         $version_number = (Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//Version").node.InnerXML
         echo "Version - $version_number"
 
-        pwsh -c "echo 'version_number=$version_number' | Out-File -FilePath $env:version_number -Append"
+        $env:version_number = $version_number
 
         echo "Version - ${{ env.version_number }}"
       shell: pwsh
