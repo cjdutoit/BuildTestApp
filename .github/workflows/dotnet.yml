@@ -32,13 +32,22 @@ jobs:
     steps:
     - name: Check out
       uses: actions/checkout@v3
+
     - name: Setup .Net
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.201
+
+    - name: Set up PowerShell
+      uses: actions/setup-powershell@v1
+      run: dotnet restore
+
+
     - name: Extract Version
+      with:
+        pwsh: latest
       run: >-
-        version_number = Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//Version" | Select-Object -ExpandProperty Node
+        version_number = [xml](Get-Content BuildTestApp/BuildTestApp.csproj).SelectSingleNode("//Version").InnerText
 
         echo 'version_number<<EOF' >> $GITHUB_ENV
 
@@ -49,7 +58,7 @@ jobs:
         echo "Version - ${{ env.version_number }}"
     - name: Extract Package Release Notes
       run: >-
-        package_release_notes = Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes" | Select-Object -ExpandProperty Node
+        package_release_notes = [xml](Get-Content BuildTestApp/BuildTestApp.csproj).SelectSingleNode("//PackageReleaseNotes").InnerText
 
         echo 'package_release_notes<<EOF' >> $GITHUB_ENV
 
