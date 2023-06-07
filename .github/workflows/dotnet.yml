@@ -58,7 +58,6 @@ jobs:
         echo 'EOF' >> $GITHUB_ENV
 
         echo "PackageReleaseNotes - ${{ env.package_release_notes }}"
-
     - name: Restore
       run: dotnet restore
     - name: Build
