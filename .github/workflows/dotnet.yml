@@ -39,7 +39,9 @@ jobs:
         dotnet-version: 7.0.201
 
     - name: Set up PowerShell
-      uses: microsoft/powershell@v1
+      uses: actions/setup-powershell@v1
+      with:
+        pwsh-version: latest
 
     - name: Extract Version
       run: >-
