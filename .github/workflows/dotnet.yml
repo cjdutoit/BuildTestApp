@@ -47,13 +47,12 @@ jobs:
         echo "EOF" >> $GITHUB_ENV
 
         echo "Version - $version_number"
+        echo "Version - ${{ env.version_number }}"
       shell: pwsh
 
     - name: Extract Package Release Notes
       run: >-
-        (Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes").node.InnerXML
-
-        $package_release_notes = $((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes").node.InnerXML)
+        $package_release_notes = (Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes").node.InnerXML
 
         echo 'package_release_notes<<EOF' >> $GITHUB_ENV
 
@@ -61,6 +60,7 @@ jobs:
 
         echo 'EOF' >> $GITHUB_ENV
 
+        echo "PackageReleaseNotes - $version_number"
         echo "PackageReleaseNotes - ${{ env.package_release_notes }}"
       shell: pwsh
 
