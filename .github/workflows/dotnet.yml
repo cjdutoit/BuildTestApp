@@ -32,10 +32,34 @@ jobs:
     steps:
     - name: Check out
       uses: actions/checkout@v3
+
     - name: Setup .Net
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.201
+
+    - name: Extract Version
+      run: |
+        $version_number = (Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//Version").node.InnerXML
+        echo "Version - $version_number"
+
+        Add-Content -Path $env:GITHUB_ENV -Value "version_number=$version_number"
+
+        echo "Version - ${{ env.version_number }}"
+      shell: pwsh
+
+    - name: Extract Package Release Notes
+      run: >-
+        $package_release_notes = (Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes").node.InnerXML
+        echo "PackageReleaseNotes - $package_release_notes"
+
+        echo 'package_release_notes<<EOF' >> $GITHUB_ENV
+        echo "$($package_release_notes)" >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
+
+        echo "PackageReleaseNotes - ${{ env.package_release_notes }}"
+      shell: pwsh
+
     - name: Restore
       run: dotnet restore
     - name: Build
@@ -68,7 +92,7 @@ jobs:
         git config user.email "action@github.com"
     - name: Extract Version
       run: >-
-        version_number=$((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "Version").node.InnerXML)
+        version_number=((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//Version").node.InnerXML)
 
         echo 'version_number<<EOF' >> $GITHUB_ENV
 
@@ -79,7 +103,7 @@ jobs:
         echo "Version - ${{ env.version_number }}"
     - name: Extract Package Release Notes
       run: >-
-        package_release_notes=$((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "PackageReleaseNotes").node.InnerXML)
+        package_release_notes=$((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes").node.InnerXML)
 
         echo 'package_release_notes<<EOF' >> $GITHUB_ENV
 
