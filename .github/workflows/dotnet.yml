@@ -40,22 +40,34 @@ jobs:
 
     - name: Extract Version
       run: >-
-        sudo apt update  
+        sudo apt update
+        
         sudo apt install -y xmlstarlet
+
         version_number = $(xmlstarlet sel -t -v "//Version" BuildTestApp/BuildTestApp.csproj)
+
         echo 'version_number<<EOF' >> $GITHUB_ENV
+
         echo -e "$version_number" >> $GITHUB_ENV
+
         echo 'EOF' >> $GITHUB_ENV
+
         echo "Version - ${{ env.version_number }}"
 
     - name: Extract Package Release Notes
       run: >-
         sudo apt update  
+
         sudo apt install -y xmlstarlet  
+
         package_release_notes = $(xmlstarlet sel -t -v "//PackageReleaseNotes" BuildTestApp/BuildTestApp.csproj)
+
         echo 'package_release_notes<<EOF' >> $GITHUB_ENV
+
         echo -e "$package_release_notes" >> $GITHUB_ENV
+
         echo 'EOF' >> $GITHUB_ENV
+
         echo "PackageReleaseNotes - ${{ env.package_release_notes }}"
 
     - name: Restore
