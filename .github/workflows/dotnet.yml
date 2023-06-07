@@ -44,7 +44,7 @@ jobs:
         echo "Version - $version_number"
 
         echo 'version_number<<EOF' >> $GITHUB_ENV
-        echo "$version_number" >> $GITHUB_ENV
+        echo "$($version_number)" >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
 
         echo "Version - ${{ env.version_number }}"
@@ -56,7 +56,7 @@ jobs:
         echo "PackageReleaseNotes - $package_release_notes"
 
         echo 'package_release_notes<<EOF' >> $GITHUB_ENV
-        echo "$package_release_notes" >> $GITHUB_ENV
+        echo "$($package_release_notes)" >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
 
         echo "PackageReleaseNotes - ${{ env.package_release_notes }}"
