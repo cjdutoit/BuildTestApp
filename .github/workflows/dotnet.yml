@@ -55,10 +55,12 @@ jobs:
         echo "version_number=$version_number" >> $env:GITHUB_ENV
 
         Write-Host "Version - $env:version_number"
+        echo "${{ env.version_number }}"
 
         Add-Content -Path $env:GITHUB_ENV -Value "version_number=$version_number"
 
         Write-Host "Version - $env:version_number"
+        echo "${{ env.version_number }}"
 
     - name: Extract Package Release Notes
       shell: pwsh
@@ -70,6 +72,10 @@ jobs:
 
         Write-Host "PackageReleaseNotes - $env:package_release_notes"
 
+    - name: Echo Variables
+      run: |-
+        echo "${{ env.version_number }}"
+        echo "${{ env.package_release_notes }}"
     - name: Restore
       run: dotnet restore
     - name: Build
