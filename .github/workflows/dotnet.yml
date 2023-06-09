@@ -32,7 +32,14 @@ jobs:
     steps:
     - name: Check out
       uses: actions/checkout@v3
-
+    - name: Check PackageReleaseNotes
+      shell: pwsh
+      run: |-
+        (Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes").node.InnerXML
+    - name: Check Version
+      shell: pwsh
+      run: |-
+        (Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//Version").node.InnerXML
     - name: Setup .Net
       uses: actions/setup-dotnet@v3
       with:
@@ -41,15 +48,14 @@ jobs:
     - name: Extract Version
       shell: pwsh
       run: >-
-        $version_number = (Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//Version").node.InnerXML
+        $version_number = ((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//Version").Node.InnerXML)
+        Write-Host "Version - $version_number"
 
-        echo "Version - $version_number"
-        
         Add-Content -Path $env:GITHUB_ENV -Value 'version_number<<EOF'
         Add-Content -Path $env:GITHUB_ENV -Value "$version_number"
         Add-Content -Path $env:GITHUB_ENV -Value 'EOF'
 
-        echo "Version - ${{ env.version_number }}"
+        Write-Host "Version - $env:version_number"
 
     - name: Extract Package Release Notes
       shell: pwsh
