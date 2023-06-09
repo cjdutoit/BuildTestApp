@@ -53,12 +53,14 @@ jobs:
         Write-Host "Version - $version_number"
 
         echo "version_number=$version_number" >> $env:GITHUB_ENV
-
         Write-Host "Version - $env:version_number"
         echo "${{ env.version_number }}"
 
         Add-Content -Path $env:GITHUB_ENV -Value "version_number=$version_number"
+        Write-Host "Version - $env:version_number"
+        echo "${{ env.version_number }}"
 
+        echo "version_number=$version_number" >> $Env:GITHUB_ENV
         Write-Host "Version - $env:version_number"
         echo "${{ env.version_number }}"
 
