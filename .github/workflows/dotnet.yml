@@ -47,8 +47,9 @@ jobs:
 
     - name: Extract Version
       shell: pwsh
-      run: >-
+      run: |-
         $version_number = ((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//Version").Node.InnerXML)
+
         Write-Host "Version - $version_number"
 
         Add-Content -Path $env:GITHUB_ENV -Value 'version_number<<EOF'
@@ -59,7 +60,7 @@ jobs:
 
     - name: Extract Package Release Notes
       shell: pwsh
-      run: >-
+      run: |-
         $package_release_notes = ((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes").Node.InnerXML)
         Write-Host "PackageReleaseNotes - $package_release_notes"
 
