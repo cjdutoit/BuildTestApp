@@ -52,9 +52,7 @@ jobs:
 
         Write-Host "Version - $version_number"
 
-        Add-Content -Path $env:GITHUB_ENV -Value 'version_number<<EOF'
-        Add-Content -Path $env:GITHUB_ENV -Value "$version_number"
-        Add-Content -Path $env:GITHUB_ENV -Value 'EOF'
+        "version_number=$version_number" >> $env:GITHUB_ENV
 
         Write-Host "Version - $env:version_number"
 
@@ -64,9 +62,7 @@ jobs:
         $package_release_notes = ((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes").Node.InnerXML)
         Write-Host "PackageReleaseNotes - $package_release_notes"
 
-        Add-Content -Path $env:GITHUB_ENV -Value 'package_release_notes<<EOF'
-        Add-Content -Path $env:GITHUB_ENV -Value "$($package_release_notes)"
-        Add-Content -Path $env:GITHUB_ENV -Value 'EOF'
+        "package_release_notes=$package_release_notes" >> $env:GITHUB_ENV
 
         Write-Host "PackageReleaseNotes - $env:package_release_notes"
 
