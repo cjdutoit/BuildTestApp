@@ -59,7 +59,7 @@ jobs:
         "package_release_notes=$package_release_notes" >> $env:GITHUB_ENV
 
         Write-Host "Env PackageReleaseNotes1 - $env:package_release_notes"
-        Write-Host "Env PackageReleaseNotes2 - ${{ $env:package_release_notes }}"
+
         Write-Host "Env PackageReleaseNotes3 - ${{ $env.package_release_notes }}"
 
     - name: Echo Variables
