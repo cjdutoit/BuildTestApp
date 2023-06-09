@@ -48,7 +48,12 @@ jobs:
       shell: pwsh
       run: |-
         $package_release_notes = ((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes").Node.InnerXML)
-        "package_release_notes=$package_release_notes" >> $env:GITHUB_ENV
+
+        # Since release notes can have multi line text we need
+        # to do the following to set the environment variable
+        "package_release_notes<<EOF" >> $env:GITHUB_ENV
+        "$package_release_notes" >> $env:GITHUB_ENV
+        "EOF" >> $env:GITHUB_ENV
 
     - name: Echo Variables
       run: |-
