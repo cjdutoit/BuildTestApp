@@ -42,32 +42,19 @@ jobs:
       shell: pwsh
       run: |-
         $version_number = ((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//Version").Node.InnerXML)
-
-        Write-Host "Found VersionNumber - $version_number"
-
         "version_number=$version_number" >> $env:GITHUB_ENV
-
-        Write-Host "Env VersionNumber - $env:version_number"
-
-        Write-Host "Env VersionNumber - ${{ env.version_number }}"
 
     - name: Extract Package Release Notes
       shell: pwsh
       run: |-
         $package_release_notes = ((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes").Node.InnerXML)
-
-        Write-Host "Found PackageReleaseNotes - $package_release_notes"
-
         "package_release_notes=$package_release_notes" >> $env:GITHUB_ENV
-
-        Write-Host "Env PackageReleaseNotes - $env:package_release_notes"
-
-        Write-Host "Env PackageReleaseNotes - ${{ env.package_release_notes }}"
 
     - name: Echo Variables
       run: |-
         echo "${{ env.version_number }}"
         echo "${{ env.package_release_notes }}"
+
     - name: Restore
       run: dotnet restore
     - name: Build
