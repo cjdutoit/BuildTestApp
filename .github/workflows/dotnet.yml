@@ -42,17 +42,26 @@ jobs:
       shell: pwsh
       run: |-
         $version_number = ((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//Version").Node.InnerXML)
-        "version_number=$version_number" >> $env:GITHUB_ENV
+
+        echo "Found version_number: '$version_number'"
+
+        "version_number<<EOF" >> $env:GITHUB_ENV
+
+        "$version_number" >> $env:GITHUB_ENV
+
+        "EOF" >> $env:GITHUB_ENV
 
     - name: Extract Package Release Notes
       shell: pwsh
       run: |-
         $package_release_notes = ((Select-Xml -Path BuildTestApp/BuildTestApp.csproj -XPath "//PackageReleaseNotes").Node.InnerXML)
 
-        # Since release notes can have multi line text we need
-        # to do the following to set the environment variable
+        echo "Found package_release_notes: '$package_release_notes'"
+
         "package_release_notes<<EOF" >> $env:GITHUB_ENV
+
         "$package_release_notes" >> $env:GITHUB_ENV
+
         "EOF" >> $env:GITHUB_ENV
 
     - name: Echo Variables
