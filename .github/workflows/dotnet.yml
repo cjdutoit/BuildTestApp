@@ -57,6 +57,7 @@ jobs:
 
     - name: Echo Variables
       run: |-
+        echo "Environment variables:"
         echo "Found next version_number: '${{ env.version_number }}'"
         echo "Found next package_release_notes: ${{ env.package_release_notes }}"
 
